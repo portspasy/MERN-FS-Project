@@ -7,6 +7,7 @@ const connectDB = async () => {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       useCreateIndex: true,
+      dbName: "ecommerce-db",
     });
     console.log(`Connected to DB: ${connection.connection.host}`);
   } catch (error) {
