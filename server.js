@@ -5,7 +5,7 @@ const connectDB = require("./config/db");
 const morgan = require("morgan");
 const cors = require("cors");
 
-// include before other routes
+// include CORS before other routes
 app.use(cors());
 app.options("*", cors());
 
