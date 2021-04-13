@@ -3,6 +3,11 @@ const app = express();
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const morgan = require("morgan");
+const cors = require("cors");
+
+// include before other routes
+app.use(cors());
+app.options("*", cors());
 
 // Routers
 const productsRouter = require("./routers/products");
