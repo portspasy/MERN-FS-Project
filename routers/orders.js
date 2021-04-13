@@ -4,9 +4,9 @@ const Order = require("../models/order");
 
 // // Respond with Hello World! on the homepage:
 router.get("/", async (req, res) => {
-  const order = await Order.find();
+  const orderList = await Order.find();
 
-  res.json(order);
+  res.json(orderList);
 });
 
 // Respond to POST request on the root route (/), the application’s home page:

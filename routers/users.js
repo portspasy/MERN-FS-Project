@@ -4,9 +4,9 @@ const User = require("../models/user");
 
 // // Respond with Hello World! on the homepage:
 router.get("/", async (req, res) => {
-  const user = await User.find();
+  const userList = await User.find();
 
-  res.json(user);
+  res.json(userList);
 });
 
 // Respond to POST request on the root route (/), the application’s home page:

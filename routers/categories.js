@@ -4,9 +4,9 @@ const Category = require("../models/category");
 
 // // Respond with Hello World! on the homepage:
 router.get("/", async (req, res) => {
-  const category = await Category.find();
+  const categoryList = await Category.find();
 
-  res.json(category);
+  res.json(categoryList);
 });
 
 // Respond to POST request on the root route (/), the application’s home page:
