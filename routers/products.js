@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/product");
 const Category = require("../models/category");
+const mongoose = require("mongoose");
 
 ////////////////////////////////////////////////////////////////////
 // [GET] List All Products :
@@ -60,7 +61,7 @@ router.post("/", async (req, res) => {
     isFeatured: req.body.isFeatured,
   });
 
-  // Save Category in the MongoDB database
+  // Save Product in the MongoDB database
   product
     .save(product)
     .then((data) => {
@@ -77,6 +78,13 @@ router.post("/", async (req, res) => {
 // [PUT] Update The Data For A Specific Product ( by ID ):
 ////////////////////////////////////////////////////////////////////
 router.put("/:id", async (req, res) => {
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    res.status(400).json({
+      success: false,
+      message: "Invalid Product ID!",
+    });
+  }
+
   const category = await Category.findById(req.body.category);
 
   if (!category) {
@@ -119,8 +127,6 @@ router.put("/:id", async (req, res) => {
 // [DELETE] Remove A Specific Product ( by ID ):
 ////////////////////////////////////////////////////////////////////
 router.delete("/:id", (req, res) => {
-  console.log(req.body);
-
   Product.findByIdAndRemove(req.params.id)
     .then((product) => {
       if (product) {
@@ -138,7 +144,7 @@ router.delete("/:id", (req, res) => {
     .catch((err) => {
       return res.status(400).send({
         success: false,
-        message: err.message,
+        message: err,
       });
     });
 });
